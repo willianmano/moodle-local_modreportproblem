@@ -44,9 +44,12 @@ $string['details'] = 'Detalhes';
 $string['problemdetails'] = 'Detalhes do problema';
 $string['problemanswer'] = 'Resposta';
 $string['submit'] = 'Responder';
-$string['username'] = 'Usuário';
+$string['userfullname'] = 'Nome completo do usuário';
 $string['delete_problem'] = 'Você tem certeza que quer deletar esse item?';
 $string['schedule'] = 'Horário';
 $string['reportproblem:view'] = 'Visualizar problemas reportados';
 $string['reportproblem:answer'] = 'Responder problema reportado';
 $string['permission'] = 'Você não tem permissão para acessar esse recurso';
+
+$string['modreportproblem:view'] = 'Usuário pode visualizar problemas reportados';
+$string['modreportproblem:answer'] = 'Usuário pode responder um problema reportado';

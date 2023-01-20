@@ -1,0 +1,41 @@
+<h2>{{#str}}reportedproblems, local_modreportproblem{{/str}}</h2>
+
+<table class="table table-bordered table-hover table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">{{#str}}reporttype, local_modreportproblem{{/str}}</th>
+            <th scope="col">{{#str}}course, core{{/str}}</th>
+            <th scope="col">{{#str}}schedule, local_modreportproblem{{/str}}</th>
+            <th scope="col" colspan="3">{{#str}}module, local_modreportproblem{{/str}}</th>
+        </tr>
+    </thead>
+    <tbody>
+    {{#reportedproblems}}
+        {{^answer}}
+            <tr>
+        {{/answer}}
+        {{#answer}}
+            <tr style="background:#dff0d8">
+        {{/answer}}
+
+            <th scope="row">{{{ id }}}</th>
+            <td>{{{ type }}}</td>
+            <td>{{{ fullname }}}</td>
+            <td>{{{date}}} ás {{{hour}}}</td>
+            <td>{{{ module }}}</td>
+            <td style="width: 130px;">
+                {{^permission}}
+                {{/permission}}
+                {{#permission}}
+                    <a href="{{{ config.wwwroot }}}/local/modreportproblem/details.php?id={{{ id }}}" class=" someclass btn btn-primary btn-small">
+                    <i class="fa fa-eye"></i>
+                    {{#str}}details, local_modreportproblem{{/str}}
+                    </a>
+                {{/permission}}
+            </td>
+
+        </tr>
+    {{/reportedproblems}}
+    </tbody>
+</table>

@@ -44,9 +44,12 @@ $string['details'] = 'Details';
 $string['problemdetails'] = 'Problem details';
 $string['problemanswer'] = 'Answer';
 $string['submit'] = 'Submit';
-$string['username'] = 'User';
+$string['userfullname'] = 'User fullname';
 $string['delete_problem'] = 'Are you sure you want to delete this?';
 $string['schedule'] = 'Schedule';
 $string['reportproblem:view'] = 'View reported problems';
 $string['reportproblem:answer'] = 'Answer reported problem';
 $string['permission'] = "You don't have permission to access this page";
+
+$string['modreportproblem:view'] = 'User can view reported problems';
+$string['modreportproblem:answer'] = 'User can answer a reported problem';
