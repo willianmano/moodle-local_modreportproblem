@@ -1,5 +1,3 @@
-<h2>{{#str}}reportedproblems, local_modreportproblem{{/str}}</h2>
-
 <table class="table table-bordered table-hover table-striped">
     <thead class="thead-dark">
         <tr>
@@ -18,7 +16,6 @@
         {{#answer}}
             <tr style="background:#dff0d8">
         {{/answer}}
-
             <th scope="row">{{{ id }}}</th>
             <td>{{{ type }}}</td>
             <td>{{{ fullname }}}</td>
@@ -28,13 +25,12 @@
                 {{^permission}}
                 {{/permission}}
                 {{#permission}}
-                    <a href="{{{ config.wwwroot }}}/local/modreportproblem/details.php?id={{{ id }}}" class=" someclass btn btn-primary btn-small">
+                    <a href="{{{ config.wwwroot }}}/local/modreportproblem/details.php?id={{id}}" class="btn btn-primary btn-small">
                     <i class="fa fa-eye"></i>
                     {{#str}}details, local_modreportproblem{{/str}}
                     </a>
                 {{/permission}}
             </td>
-
         </tr>
     {{/reportedproblems}}
     </tbody>
