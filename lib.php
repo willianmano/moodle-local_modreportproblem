@@ -24,6 +24,16 @@ function local_modreportproblem_moove_module_footer() {
     return $renderer->render($contentrenderable);
 }
 
+function local_modreportproblem_before_footer() {
+    global $CFG;
+
+    if ($CFG->theme == 'moove') {
+        return '';
+    }
+
+    return local_modreportproblem_moove_module_footer();
+}
+
 /**
  * This function extends the navigation with the report items
  *
