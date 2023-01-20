@@ -20,13 +20,9 @@
                             <label for="problemtype">{{#str}}reporttype, local_modreportproblem{{/str}}</label>
                             <select id="problemtype" name="problemtype" class="form-control" required>
                                 <option value="">{{#str}}reportselectoption, local_modreportproblem{{/str}}</option>
-                                <option value="reportvideoproblem">{{#str}}reportvideoproblem, local_modreportproblem{{/str}}</option>
-                                <option value="reportaudioproblem">{{#str}}reportaudioproblem, local_modreportproblem{{/str}}</option>
-                                <option value="reportoutdatedmaterial">{{#str}}reportoutdatedmaterial, local_modreportproblem{{/str}}</option>
-                                <option value="reportconfusematerial">{{#str}}reportconfusematerial, local_modreportproblem{{/str}}</option>
-                                <option value="reportcommentsdetailslevel">{{#str}}reportcommentsdetailslevel, local_modreportproblem{{/str}}</option>
-                                <option value="reportcontenterror">{{#str}}reportcontenterror, local_modreportproblem{{/str}}</option>
-                                <option value="reportothers">{{#str}}reportothers, local_modreportproblem{{/str}}</option>
+                                {{#typeOptions}}
+                                    <option value="{{.}}">{{.}}</option>
+                                {{/typeOptions}}
                             </select>
                         </div>
                         <div class="form-group">

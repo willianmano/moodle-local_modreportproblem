@@ -4,6 +4,6 @@
 
 {{#js}}
     require(['local_modreportproblem/reportproblem'], function(ReportProblem) {
-        ReportProblem.init({{courseid}}, {{cmid}}, '{{modname}}');
+        ReportProblem.init({{courseid}}, {{cmid}}, '{{modname}}', {{{options}}});
     });
 {{/js}}

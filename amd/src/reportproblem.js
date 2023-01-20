@@ -26,14 +26,16 @@ define(['jquery', 'core/log', 'core/modal_factory', 'local_modreportproblem/moda
         TOGGLE_REGION: '.modreportproblem',
         CMID_INPUT: '#cmid',
         COURSEID_INPUT: '#courseid',
-        MODULE_INPUT: '#module'
+        MODULE_INPUT: '#module',
+        PROBLEM_TYPE_INPUT: '#problemtype'
     };
 
     var courseid = null;
     var cmid = null;
     var modulename = null;
+    var options = null;
 
-    var Reportproblem = function(courseId, cmId, moduleName) {
+    var Reportproblem = function(courseId, cmId, moduleName, typeOptions) {
 
         if (!$(SELECTORS.TOGGLE_REGION).length) {
             Log.debug('Page is missing the report problem trigger button');
@@ -42,6 +44,7 @@ define(['jquery', 'core/log', 'core/modal_factory', 'local_modreportproblem/moda
         courseid = courseId;
         cmid = cmId;
         modulename = moduleName;
+        options = typeOptions;
 
         this.registerEventListeners();
     };
@@ -60,6 +63,13 @@ define(['jquery', 'core/log', 'core/modal_factory', 'local_modreportproblem/moda
             $(SELECTORS.CMID_INPUT).val(cmid);
             $(SELECTORS.COURSEID_INPUT).val(courseid);
             $(SELECTORS.MODULE_INPUT).val(modulename);
+
+            $.each(options, function(i, item) {
+                $(SELECTORS.PROBLEM_TYPE_INPUT).append($('<option>', {
+                    value: item,
+                    text: item
+                }));
+            });
         }.bind(this));
     };
 
@@ -76,8 +86,8 @@ define(['jquery', 'core/log', 'core/modal_factory', 'local_modreportproblem/moda
     };
 
     return {
-        'init': function(courseid, cmid, modulename) {
-            return new Reportproblem(courseid, cmid, modulename);
+        'init': function(courseid, cmid, modulename, typeOptions) {
+            return new Reportproblem(courseid, cmid, modulename, typeOptions);
         }
     };
 });

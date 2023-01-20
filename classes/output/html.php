@@ -27,10 +27,19 @@ class html implements renderable, templatable {
     }
 
     public function export_for_template(renderer_base $output) {
+
+        $config = get_config('local_modreportproblem');
+
+        $options = [];
+        if (isset($config->options)) {
+            $options = explode("\r\n", $config->options);
+        }
+
         return [
             'courseid' => $this->courseid,
             'cmid' => $this->cmid,
-            'modname' => $this->modname
+            'modname' => $this->modname,
+            'options' => json_encode($options)
         ];
     }
 }
