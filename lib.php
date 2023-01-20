@@ -19,7 +19,7 @@ function local_modreportproblem_moove_module_footer() {
 
     $renderer = $PAGE->get_renderer('local_modreportproblem');
 
-    $contentrenderable = new \local_modreportproblem\output\html($PAGE->course->id, $PAGE->cm->id, $PAGE->cm->modname);
+    $contentrenderable = new \local_modreportproblem\output\html($PAGE->context->id, $PAGE->course->id, $PAGE->cm->id, $PAGE->cm->modname);
 
     return $renderer->render($contentrenderable);
 }
@@ -36,4 +36,66 @@ function local_modreportproblem_extend_navigation_course($navigation, $course, $
         $url = new moodle_url('/local/modreportproblem/course.php', ['id' => $course->id]);
         $navigation->find('coursereports', navigation_node::TYPE_CONTAINER)->add(get_string('reportedproblems', 'local_modreportproblem'), $url, navigation_node::TYPE_SETTING, null, null, new pix_icon('i/report', ''));
     }
+}
+
+/**
+ * Returns report problem form fragment.
+ *
+ * @param $args
+ * @return string
+ */
+function local_modreportproblem_output_fragment_report_form($args) {
+    $args = (object) $args;
+
+    $formdata = [];
+    if (!empty($args->jsonformdata)) {
+        $serialiseddata = json_decode($args->jsonformdata);
+        $formdata = (array)$serialiseddata;
+    }
+
+    $mform = new \local_modreportproblem\form\report($formdata, [
+        'courseid' => $serialiseddata->courseid,
+        'cmid' => $serialiseddata->cmid,
+        'module' => $serialiseddata->module,
+    ]);
+
+    if (!empty($args->jsonformdata)) {
+        // If we were passed non-empty form data we want the mform to call validation functions and show errors.
+        $mform->is_validated();
+    }
+
+    return $mform->render();
+}
+
+/**
+ * Returns answer problem form fragment.
+ *
+ * @param $args
+ * @return string
+ */
+function local_modreportproblem_output_fragment_answer_form($args) {
+    $args = (object) $args;
+    $o = '';
+
+    $formdata = [];
+    if (!empty($args->jsonformdata)) {
+        $serialiseddata = json_decode($args->jsonformdata);
+        $formdata = (array)$serialiseddata;
+    }
+
+    $mform = new \local_modreportproblem\form\answer($formdata, [
+        'id' => $serialiseddata->id,
+    ]);
+
+    if (!empty($args->jsonformdata)) {
+        // If we were passed non-empty form data we want the mform to call validation functions and show errors.
+        $mform->is_validated();
+    }
+
+    ob_start();
+    $mform->display();
+    $o .= ob_get_contents();
+    ob_end_clean();
+
+    return $o;
 }

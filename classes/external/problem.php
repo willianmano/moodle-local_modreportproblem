@@ -6,6 +6,7 @@ use external_api;
 use external_value;
 use external_single_structure;
 use external_function_parameters;
+use local_modreportproblem\form\report;
 
 /**
  * Section external api class.
@@ -22,41 +23,47 @@ class problem extends external_api {
      */
     public static function create_parameters() {
         return new external_function_parameters([
-            'formdata' => new external_value(PARAM_RAW, 'The data from the form'),
+            'contextid' => new external_value(PARAM_INT, 'The context id for the course module'),
+            'jsonformdata' => new external_value(PARAM_RAW, 'The data from the form'),
         ]);
     }
 
 
-    public static function create($formdata) {
+    public static function create($contextid, $jsonformdata) {
         global $DB, $USER;
 
-        $params = self::validate_parameters(self::create_parameters(), ['formdata' => $formdata]);
+        $params = self::validate_parameters(self::create_parameters(),
+            ['contextid' => $contextid, 'jsonformdata' => $jsonformdata]);
+
+        $context = \context::instance_by_id($contextid, MUST_EXIST);
+
+        self::validate_context($context);
+
+        $serialiseddata = json_decode($params['jsonformdata']);
 
         $data = [];
-        parse_str($params['formdata'], $data);
+        parse_str($serialiseddata, $data);
 
-        $transaction = $DB->start_delegated_transaction();
+        $mform = new report($data);
 
-        $sql = 'SELECT cm.id, cm.course, cm.instance, m.name
-                FROM {course_modules} cm
-                INNER JOIN {modules} m ON cm.module = m.id
-                WHERE cm.id = :cmid';
-        $coursemodule = $DB->get_record_sql($sql, ['cmid' => $data['cmid']]);
+        $validateddata = $mform->get_data();
+
+        if (!$validateddata) {
+            throw new \moodle_exception('invalidformdata');
+        }
 
         $recorddata = new \stdClass();
-        $recorddata->courseid = $coursemodule->course;
+        $recorddata->courseid = $validateddata->courseid;
         $recorddata->userid = $USER->id;
-        $recorddata->cmid = $coursemodule->id;
-        $recorddata->module = $coursemodule->name;
-        $recorddata->type = $data['problemtype'];
-        $recorddata->details = $data['problemdetails'];
+        $recorddata->cmid = $validateddata->cmid;
+        $recorddata->module = $validateddata->module;
+        $recorddata->type = $validateddata->type;
+        $recorddata->details = $validateddata->details;
         $recorddata->timecreated = time();
 
         $DB->insert_record('modreportproblem', $recorddata);
 
-        $transaction->allow_commit();
-
-        return ['status' => true];
+        return ['status' => get_string('reportsuccess', 'local_modreportproblem')];
     }
 
     public static function create_returns() {

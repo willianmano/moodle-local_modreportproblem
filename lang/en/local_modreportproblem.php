@@ -37,6 +37,7 @@ $string['reporttitle'] = 'The support team will receive the problem with this ac
 $string['reporttype'] = 'Problem type';
 $string['reportselectoption'] = 'Choose an option';
 $string['reportprobledetails'] = 'Problem details';
+$string['reportsuccess'] = 'Problem reported with success. Thank you for helping us improve our platform.';
 $string['reportsend'] = 'Send';
 $string['reportedproblems'] = 'Reported problems';
 $string['module'] = 'Module';

@@ -64,7 +64,6 @@ class details implements renderable, templatable {
 
         $user = $DB->get_record('user', ['id' => $this->problem->userid]);
 
-
         $this->problem->coursename = $this->course->fullname;
         $this->problem->userfullname = fullname($user);
         $this->problem->modulename = $this->coursemodule->name;

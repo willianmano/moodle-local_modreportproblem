@@ -1,9 +1,9 @@
 <div class="moove-container-fluid p-0 mb-4 path-local_modreportproblem">
-    <a href="#" class="btn btn-danger modreportproblem"><i class="fa fa-exclamation-circle "></i> Report a problem</a>
+    <a href="#" class="btn btn-danger modreportproblem"><i class="fa fa-exclamation-circle "></i> {{#str}}reportproblem, local_modreportproblem{{/str}}</a>
 </div>
 
 {{#js}}
-    require(['local_modreportproblem/reportproblem'], function(ReportProblem) {
-        ReportProblem.init({{courseid}}, {{cmid}}, '{{modname}}', {{{options}}});
+    require(['local_modreportproblem/problem/create'], function(CreateProblem) {
+        CreateProblem.init('.modreportproblem', {{contextid}}, {{courseid}}, {{cmid}}, '{{module}}');
     });
 {{/js}}

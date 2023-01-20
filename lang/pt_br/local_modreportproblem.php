@@ -37,6 +37,7 @@ $string['reporttitle'] = 'A equipe de suporte receberá seu problema reportado e
 $string['reporttype'] = 'Tipo de problema';
 $string['reportselectoption'] = 'Selecione uma opção';
 $string['reportprobledetails'] = 'Detalhes do problema';
+$string['reportsuccess'] = 'Problema reportado com sucesso. Obrigado por nos ajudar a evoluir nossa plataforma.';
 $string['reportsend'] = 'Enviar';
 $string['reportedproblems'] = 'Problemas reportados';
 $string['module'] = 'Módulo';

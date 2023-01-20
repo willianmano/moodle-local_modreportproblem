@@ -16,14 +16,16 @@ use renderer_base;
  * @author      Willian Mano <willianmanoaraujo@gmail.com>
  */
 class html implements renderable, templatable {
+    protected $contextid;
     protected $courseid;
     protected $cmid;
-    protected $modname;
+    protected $module;
 
-    public function __construct($courseid, $cmid, $modname) {
+    public function __construct($contextid, $courseid, $cmid, $module) {
+        $this->contextid = $contextid;
         $this->courseid = $courseid;
         $this->cmid = $cmid;
-        $this->modname = $modname;
+        $this->module = $module;
     }
 
     public function export_for_template(renderer_base $output) {
@@ -36,9 +38,10 @@ class html implements renderable, templatable {
         }
 
         return [
+            'contextid' => $this->contextid,
             'courseid' => $this->courseid,
             'cmid' => $this->cmid,
-            'modname' => $this->modname,
+            'module' => $this->module,
             'options' => json_encode($options)
         ];
     }
