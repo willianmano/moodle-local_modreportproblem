@@ -52,7 +52,7 @@ $reporturl = new moodle_url('/local/modreportproblem/course.php', ['id' => $cour
 
 // Add the page nav to breadcrumb.
 $PAGE->navbar->add(get_string('reportedproblems', 'local_modreportproblem'), $reporturl);
-$PAGE->navbar->add(get_string('problemdetails', 'local_modreportproblem'));
+$PAGE->navbar->add(get_string('details', 'local_modreportproblem'));
 
 $output = $PAGE->get_renderer('local_modreportproblem');
 

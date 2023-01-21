@@ -57,7 +57,7 @@ class report extends \moodleform {
         $formdescription = '<div class="alert alert-info mb-0">'. get_string('reporttitle', 'local_modreportproblem') .'</div>';
         $mform->addElement('html', $formdescription);
 
-        $mform->addElement('select', 'type', get_string('reporttype', 'local_modreportproblem'), $this->get_problem_types());
+        $mform->addElement('select', 'type', get_string('type', 'local_modreportproblem'), $this->get_problem_types());
         $mform->setType('type', PARAM_RAW);
         $mform->addRule('type', get_string('required'), 'required', null, 'client');
 
@@ -103,9 +103,7 @@ class report extends \moodleform {
 
         $options = explode("\r\n", $config->options);
 
-        $reportselectoption = get_string('reportselectoption', 'local_modreportproblem');
-
-        $data[null] = $reportselectoption;
+        $data[null] = get_string('selectoption', 'local_modreportproblem');
         foreach ($options as $option) {
             $data[$option] = $option;
         }
