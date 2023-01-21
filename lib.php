@@ -85,7 +85,6 @@ function local_modreportproblem_output_fragment_report_form($args) {
  */
 function local_modreportproblem_output_fragment_answer_form($args) {
     $args = (object) $args;
-    $o = '';
 
     $formdata = [];
     if (!empty($args->jsonformdata)) {
@@ -95,6 +94,7 @@ function local_modreportproblem_output_fragment_answer_form($args) {
 
     $mform = new \local_modreportproblem\form\answer($formdata, [
         'id' => $serialiseddata->id,
+        'answer' => $serialiseddata->answer
     ]);
 
     if (!empty($args->jsonformdata)) {
@@ -102,10 +102,5 @@ function local_modreportproblem_output_fragment_answer_form($args) {
         $mform->is_validated();
     }
 
-    ob_start();
-    $mform->display();
-    $o .= ob_get_contents();
-    ob_end_clean();
-
-    return $o;
+    return $mform->render();
 }

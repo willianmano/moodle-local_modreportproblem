@@ -43,14 +43,19 @@ $string['reportedproblems'] = 'Reported problems';
 $string['module'] = 'Module';
 $string['details'] = 'Details';
 $string['problemdetails'] = 'Problem details';
-$string['problemanswer'] = 'Answer';
+$string['answer'] = 'Answer';
 $string['submit'] = 'Submit';
 $string['userfullname'] = 'User fullname';
-$string['delete_problem'] = 'Are you sure you want to delete this?';
-$string['schedule'] = 'Schedule';
 $string['reportproblem:view'] = 'View reported problems';
 $string['reportproblem:answer'] = 'Answer reported problem';
 $string['permission'] = "You don't have permission to access this page";
 
 $string['modreportproblem:view'] = 'User can view reported problems';
 $string['modreportproblem:answer'] = 'User can answer a reported problem';
+$string['answertheproblem'] = 'Answer this reported problem';
+$string['answersuccess'] = 'Problem answered with success.';
+
+$string['messageprovider:problemanswered'] = 'Problem answered';
+$string['yourpeoblemwasanswered'] = 'Your problem was answered';
+$string['yourpeoblemwasanswered_button'] = 'Click to view the answer';
+$string['yourpeoblemwasanswered_contextname'] = 'Problem answered';

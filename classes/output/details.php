@@ -38,16 +38,18 @@ use templatable;
  */
 class details implements renderable, templatable {
 
+    protected $context;
     protected $course;
     protected $coursemodule;
     protected $problem;
 
-    public function __construct($course, $coursemodule, $problem) {
-        $problem->timecrated = userdate($problem->timecreated);
-
+    public function __construct($context, $course, $coursemodule, $problem) {
+        $this->context = $context;
         $this->course = $course;
         $this->coursemodule = $coursemodule;
+
         $this->problem = $problem;
+        $problem->timecrated = userdate($problem->timecreated);
     }
 
     /**
@@ -64,12 +66,20 @@ class details implements renderable, templatable {
 
         $user = $DB->get_record('user', ['id' => $this->problem->userid]);
 
-        $this->problem->coursename = $this->course->fullname;
-        $this->problem->userfullname = fullname($user);
-        $this->problem->modulename = $this->coursemodule->name;
-        $this->problem->date = date ( 'd/m/Y', $this->problem->timecreated);
-        $this->problem->hour = date ( 'h:i', $this->problem->timecreated );
-
-        return $this->problem;
+        return [
+            'id' => $this->problem->id,
+            'courseid' => $this->problem->courseid,
+            'module' => $this->problem->module,
+            'type' => $this->problem->type,
+            'details' => $this->problem->details,
+            'answer' => $this->problem->answer,
+            'cmid' => $this->coursemodule->id,
+            'modulename' => $this->coursemodule->name,
+            'date' => date( 'd/m/Y', $this->problem->timecreated),
+            'hour' => date( 'h:i', $this->problem->timecreated),
+            'userfullname' => fullname($user),
+            'coursename' => $this->course->fullname,
+            'contextid' => $this->context->id
+        ];
     }
 }

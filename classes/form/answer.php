@@ -40,7 +40,7 @@ class answer extends \moodleform {
 
         $mform->addElement('textarea', 'answer', get_string('answer', 'local_modreportproblem'), 'wrap="virtual" rows="4" cols="70"');
         $mform->setType('answer', PARAM_NOTAGS);
-        $mform->addRule('answer', null, 'required');
+        $mform->addRule('answer', get_string('required'), 'required', null, 'client');
     }
 
     /**

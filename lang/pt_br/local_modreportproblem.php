@@ -43,14 +43,19 @@ $string['reportedproblems'] = 'Problemas reportados';
 $string['module'] = 'Módulo';
 $string['details'] = 'Detalhes';
 $string['problemdetails'] = 'Detalhes do problema';
-$string['problemanswer'] = 'Resposta';
+$string['answer'] = 'Resposta';
 $string['submit'] = 'Responder';
 $string['userfullname'] = 'Nome completo do usuário';
-$string['delete_problem'] = 'Você tem certeza que quer deletar esse item?';
-$string['schedule'] = 'Horário';
 $string['reportproblem:view'] = 'Visualizar problemas reportados';
 $string['reportproblem:answer'] = 'Responder problema reportado';
 $string['permission'] = 'Você não tem permissão para acessar esse recurso';
 
 $string['modreportproblem:view'] = 'Usuário pode visualizar problemas reportados';
 $string['modreportproblem:answer'] = 'Usuário pode responder um problema reportado';
+$string['answertheproblem'] = 'Responder este problema reportado';
+$string['answersuccess'] = 'Problema respondido com sucesso.';
+
+$string['messageprovider:problemanswered'] = 'Problema respondido';
+$string['yourpeoblemwasanswered'] = 'Seu problema foi respondido';
+$string['yourpeoblemwasanswered_button'] = 'Clique para ver a resposta';
+$string['yourpeoblemwasanswered_contextname'] = 'Problema respondido';

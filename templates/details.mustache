@@ -1,32 +1,31 @@
 <h2>{{#str}}problemdetails, local_modreportproblem{{/str}}</h2>
 
-<p><b>{{#str}}course, core{{/str}}</b>: <a href="{{{config.wwwroot}}}/course/view.php?id={{{courseid}}}">{{{ coursename }}}</a></p>
+<p><b>{{#str}}course, core{{/str}}</b>: <a href="{{config.wwwroot}}/course/view.php?id={{courseid}}">{{coursename}}</a></p>
 
-<p><b>{{#str}}module, local_modreportproblem{{/str}}</b>: <a href="{{{config.wwwroot}}}/mod/{{{module}}}/view.php?id={{{cmid}}}">{{{ modulename }}}</a></p>
+<p><b>{{#str}}module, local_modreportproblem{{/str}}</b>: <a href="{{config.wwwroot}}/mod/{{module}}/view.php?id={{cmid}}">{{modulename}}</a></p>
 
 <hr />
 
-<p><b>{{#str}}reporttype, local_modreportproblem{{/str}}</b>: {{{ type }}}</p>
+<p><b>{{#str}}reporttype, local_modreportproblem{{/str}}</b>: {{type}}</p>
 
-<p><b>{{#str}}userfullname, local_modreportproblem{{/str}}</b>: {{{ userfullname }}}</p>
+<p><b>{{#str}}userfullname, local_modreportproblem{{/str}}</b>: {{userfullname}}</p>
 
-<p><b>{{#str}}schedule, local_modreportproblem{{/str}}</b>: {{{date}}} ás {{{hour}}}</p>
+<p><b>{{#str}}schedule, local_modreportproblem{{/str}}</b>: {{date}} {{hour}}</p>
 
-<p><b>{{#str}}reportprobledetails, local_modreportproblem{{/str}}</b>:</p>
+<p class="mb-0"><b>{{#str}}reportprobledetails, local_modreportproblem{{/str}}</b>:</p>
+<textarea rows="5" disabled class="form-control mb-2">{{details}}</textarea>
 
-<textarea rows="10" disabled class="form-control mb-2">{{{ details }}}</textarea>
+<div id="answer-area" {{^answer}}class="d-none"{{/answer}}>
+    <p class="mb-0"><b>{{#str}}answer, local_modreportproblem{{/str}}</b>:</p>
+    <textarea id="answer-textarea" rows="5" disabled class="form-control">{{answer}}</textarea>
+</div>
 
-<p><b>{{#str}}problemanswer, local_modreportproblem{{/str}}</b>:</p>
-{{#answer}}
-    <textarea rows="10" disabled class="form-control">{{{ answer }}}</textarea>
-{{/answer}}
 {{^answer}}
-    <form accept-charset="utf-8" action="{{{ config.wwwroot }}}/local/modreportproblem/details.php?id={{{id}}}" method="post">
-    <div class="form-group">
-        <textarea rows="4" class="form-control" id="answer" name="answer" required></textarea>
-    </div>
-    <div class="form-group">
-        <input class= "btn btn-success" type="submit" value="{{#str}}submit, local_modreportproblem{{/str}}">
-    </div>
-    </form>
+    <a class="btn btn-info" id="btn-answer" href="#">{{#str}}answertheproblem, local_modreportproblem{{/str}}</a>
+
+    {{#js}}
+        require(['local_modreportproblem/problem/answer'], function(Answer) {
+            Answer.init('#btn-answer', {{contextid}}, {{id}});
+        });
+    {{/js}}
 {{/answer}}

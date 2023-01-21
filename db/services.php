@@ -18,5 +18,13 @@ $functions = [
         'description' => 'Report a new problem.',
         'type' => 'write',
         'ajax' => true
+    ),
+    'local_modreportproblem_answer' => array(
+        'classname' => 'local_modreportproblem\external\problem',
+        'classpath' => 'local/modreportproblem/classes/external/problem.php',
+        'methodname' => 'answer',
+        'description' => 'Answer a problem.',
+        'type' => 'write',
+        'ajax' => true
     )
 ];

@@ -34,8 +34,8 @@ require_course_login($course, true);
 
 $context = context_course::instance($course->id);
 
-if (!has_capability('local/modreportproblem:answer', $context)) {
-    return 0;
+if (!has_capability('local/modreportproblem:answer', $context) && $problem->userid != $USER->id) {
+    throw new moodle_exception('Illegal access');
 }
 
 $url = new moodle_url('/local/modreportproblem/details.php', ['id' => $id]);
@@ -59,7 +59,7 @@ $output = $PAGE->get_renderer('local_modreportproblem');
 echo $output->header();
 echo $output->container_start('modreportproblem-details');
 
-$page = new \local_modreportproblem\output\details($course, $coursemodule, $problem);
+$page = new \local_modreportproblem\output\details($context, $course, $coursemodule, $problem);
 
 echo $output->render($page);
 

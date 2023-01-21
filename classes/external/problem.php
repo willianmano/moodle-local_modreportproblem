@@ -6,7 +6,9 @@ use external_api;
 use external_value;
 use external_single_structure;
 use external_function_parameters;
+use local_modreportproblem\form\answer;
 use local_modreportproblem\form\report;
+use local_modreportproblem\notification\problemanswered;
 
 /**
  * Section external api class.
@@ -67,6 +69,56 @@ class problem extends external_api {
     }
 
     public static function create_returns() {
+        return new external_single_structure([
+            'status' => new external_value(PARAM_TEXT, 'The transaction status'),
+        ]);
+    }
+
+    public static function answer_parameters() {
+        return new external_function_parameters([
+            'contextid' => new external_value(PARAM_INT, 'The context id for the course module'),
+            'jsonformdata' => new external_value(PARAM_RAW, 'The data from the form'),
+        ]);
+    }
+
+    public static function answer($contextid, $jsonformdata) {
+        global $DB, $USER;
+
+        $params = self::validate_parameters(self::answer_parameters(),
+            ['contextid' => $contextid, 'jsonformdata' => $jsonformdata]);
+
+        $context = \context::instance_by_id($contextid, MUST_EXIST);
+
+        self::validate_context($context);
+
+        $serialiseddata = json_decode($params['jsonformdata']);
+
+        $data = [];
+        parse_str($serialiseddata, $data);
+
+        $mform = new answer($data);
+
+        $validateddata = $mform->get_data();
+
+        if (!$validateddata) {
+            throw new \moodle_exception('invalidformdata');
+        }
+
+        $problem = $DB->get_record('modreportproblem', ['id' => $validateddata->id], '*', MUST_EXIST);
+
+        $problem->answer = $validateddata->answer;
+        $problem->timeanswered = time();
+        $problem->useranswer = $USER->id;
+
+        $DB->update_record('modreportproblem', $problem);
+
+        $notification = new problemanswered($context, $problem);
+        $notification->send();
+
+        return ['status' => get_string('answersuccess', 'local_modreportproblem')];
+    }
+
+    public static function answer_returns() {
         return new external_single_structure([
             'status' => new external_value(PARAM_TEXT, 'The transaction status'),
         ]);
