@@ -40,6 +40,7 @@ $string['problemdetails'] = 'Problem details';
 $string['reportsuccess'] = 'Problem reported with success. Thank you for helping us improve our platform.';
 $string['reportedproblems'] = 'Reported problems';
 $string['module'] = 'Module';
+$string['timereported'] = 'Time reported';
 $string['details'] = 'Details';
 $string['answer'] = 'Answer';
 $string['userfullname'] = 'User fullname';
