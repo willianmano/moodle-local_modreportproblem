@@ -28,8 +28,15 @@ defined('MOODLE_INTERNAL') || die;
 if ($hassiteconfig) {
     $settings = new admin_settingpage('local_modreportproblem', get_string('settings', 'local_modreportproblem'));
 
-    $settings->add(new admin_setting_configtextarea('local_modreportproblem/options', get_string('problemtypes', 'local_modreportproblem'),
-        get_string('problemtype_desc', 'local_modreportproblem'), '', PARAM_RAW));
+    $settings->add(
+        new admin_setting_configtextarea(
+            'local_modreportproblem/options',
+            get_string('problemtypes', 'local_modreportproblem'),
+            get_string('problemtype_desc', 'local_modreportproblem'),
+            '',
+            PARAM_RAW
+        )
+    );
 
     $ADMIN->add('localplugins', $settings);
 }
