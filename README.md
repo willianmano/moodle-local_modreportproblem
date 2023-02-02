@@ -1,8 +1,10 @@
-# Report a course module problem #
+# Report problem #
 
-TODO Describe the plugin shortly here.
+This plugin enable students to report a problem on a Moodle activity.
 
-TODO Provide more detailed description here.
+Site administrator can crete problem types on the plugin settings in Site administrator.
+
+Inside the course reports area it is possible to view a report of all problems and the possibility to answer a reported problem. Once answered the user who reported the problem receives a notification with the answer. 
 
 ## Installing via uploaded ZIP file ##
 
