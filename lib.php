@@ -41,10 +41,14 @@ function local_modreportproblem_moove_module_footer() {
     return $renderer->render($contentrenderable);
 }
 
+function local_modreportproblem_dom_module_footer() {
+    return local_modreportproblem_moove_module_footer();
+}
+
 function local_modreportproblem_before_footer() {
     global $CFG;
 
-    if ($CFG->theme == 'moove') {
+    if ($CFG->theme == 'moove' || $CFG->theme == 'dom') {
         return '';
     }
 
