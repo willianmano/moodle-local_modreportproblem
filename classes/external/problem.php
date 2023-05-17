@@ -16,10 +16,10 @@
 
 namespace local_modreportproblem\external;
 
-use external_api;
-use external_value;
-use external_single_structure;
-use external_function_parameters;
+use core_external\external_api;
+use core_external\external_value;
+use core_external\external_single_structure;
+use core_external\external_function_parameters;
 use local_modreportproblem\form\answer;
 use local_modreportproblem\form\report;
 use local_modreportproblem\notification\problemanswered;
@@ -51,7 +51,7 @@ class problem extends external_api {
         $params = self::validate_parameters(self::create_parameters(),
             ['contextid' => $contextid, 'jsonformdata' => $jsonformdata]);
 
-        $context = \context::instance_by_id($contextid, MUST_EXIST);
+        $context = \core\context::instance_by_id($contextid, MUST_EXIST);
 
         self::validate_context($context);
 
@@ -101,7 +101,7 @@ class problem extends external_api {
         $params = self::validate_parameters(self::answer_parameters(),
             ['contextid' => $contextid, 'jsonformdata' => $jsonformdata]);
 
-        $context = \context::instance_by_id($contextid, MUST_EXIST);
+        $context = \core\context::instance_by_id($contextid, MUST_EXIST);
 
         self::validate_context($context);
 

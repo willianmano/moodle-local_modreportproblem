@@ -31,7 +31,7 @@ $course = $DB->get_record('course', ['id' => $id], '*', MUST_EXIST);
 
 require_course_login($course, true);
 
-$context = context_course::instance($course->id);
+$context = \core\context\course::instance($course->id);
 
 if (!has_capability('local/modreportproblem:view', $context)) {
     \core\notification::info(get_string('permission', 'local_modreportproblem'));

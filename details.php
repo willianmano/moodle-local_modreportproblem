@@ -32,7 +32,7 @@ list($course, $coursemodule) = get_course_and_cm_from_cmid($problem->cmid, $prob
 
 require_course_login($course, true);
 
-$context = context_course::instance($course->id);
+$context = \core\context\course::instance($course->id);
 
 if (!has_capability('local/modreportproblem:answer', $context) && $problem->userid != $USER->id) {
     throw new moodle_exception('Illegal access');
